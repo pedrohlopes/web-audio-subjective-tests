@@ -1,23 +1,31 @@
 import logo from './logo.svg';
 import './App.css';
-
+import {useState, useEffect} from 'react';
+import Home from './Components/HomeScreen';
+import TestScreen from './Components/TestScreen';
 function App() {
+
+  const [homeClear,setHomeClear] = useState(false);
+  const [data, setData] = useState(null);
+  const [questions, setQuestions] = useState(null);	
+  const [homeInfo, setHomeInfo] = useState(null);
+  useEffect(() => {
+    fetch('subjective_test_config.json')
+        .then(response => response.json())
+        .then(data => {
+          setData(data)
+          setQuestions(data.questions)
+          setHomeInfo(data.homeInfo)
+        })
+        .catch(error => console.error(error));
+  }, []);
+
+  if (data === null) {
+      return <div>Loading...</div>;
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {homeClear? <TestScreen questions={questions}/>:  <Home setHomeClear={setHomeClear} homeInfo={homeInfo}/>}
     </div>
   );
 }

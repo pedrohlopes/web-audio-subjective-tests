@@ -1,0 +1,53 @@
+{
+    "homeInfo": {
+        "title": "Home",
+        "message": "Esse é um teste para testar alguma coisa.",
+        "buttonText": "Começar teste"
+    },
+    "questions":
+    [
+        {
+            "name": "Questão comparativa",
+            "id":1,
+            "anchor": null,
+            "reference": null,
+            "testSignals": ["test_signals/lobo_new_3.wav", "test_signals/lobo_new_3.wav"],
+            "scale": {
+              "type": ["continous", "discrete", "dropdown"],
+              "alignment": ["horizontal", "vertical"],
+              "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
+              "values": [0,1,2,3,4]
+            },
+            "hiddenReference": null
+        },
+
+        {
+            "name": "Questão comparativa 2",
+            "id":2,
+            "anchor": null,
+            "reference": null,
+            "testSignals": ["test_signals/lobo_new_3.wav", "test_signals/lobo_new_3.wav", "test_signals/lobo_new_3.wav","test_signals/lobo_new_3.wav"],
+            "scale": {
+                "type": ["continous", "discrete", "dropdown"],
+                "alignment": ["horizontal", "vertical"],
+                "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
+                "values": [0,1,2,3,4]
+            },
+            "hiddenReference": null
+        },
+        {
+            "name": "Questão comparativa 3",
+            "id":3,
+            "anchor": null,
+            "reference": null,
+            "testSignals": ["test_signals/lobo_new_3.wav"],
+            "scale": {
+                "type": ["continous", "discrete", "dropdown"],
+                "alignment": ["horizontal", "vertical"],
+                "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
+                "values": [0,1,2,3,4]
+            },
+            "hiddenReference": null
+        }
+    ]
+}
