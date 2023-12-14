@@ -1,25 +1,89 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@material-tailwind/react';
+import AudioTestBlock from './AudioTestBlock';
+import { getRandomIndexes, shuffle, shuffleArrayByIndexes } from '../utils/general';
 
 export default function Question({ question, questionIndex, testResults, setTestResults }) {
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [submitEnabled, setSubmitEnabled] = useState(false);
+    const [audioTestBlocks, setAudioTestBlocks] = useState([]);
+    const [randomIndexes, setRandomIndexes] = useState([]);
+
 
     useEffect(() => {
         // Reset selectedOptions when question changes
+        let newSelectedOptions = Array(question.testSignals.length).fill("");
+        newSelectedOptions['reference'] = "";
+        newSelectedOptions['anchor'] = "";
         setSelectedOptions(Array(question.testSignals.length).fill(""));
+        setRandomIndexes(getRandomIndexes(newSelectedOptions.concat(['reference', 'anchor'])))
     }, [question]);
 
     useEffect(() => {
         // Check if all audio signals are tested
-        const allAudioTested = selectedOptions.length === question.testSignals.length && selectedOptions.every(option => option !== "");
+        let allAudioTested = selectedOptions.length === question.testSignals.length && selectedOptions.every(option => option !== "");
+        if (question.anchor){
+            allAudioTested = allAudioTested && selectedOptions['anchor']
+        }
+        if (question.reference){
+            allAudioTested = allAudioTested && selectedOptions['reference']
+        }
+        
         setSubmitEnabled(allAudioTested);
-    }, [selectedOptions, question.testSignals.length]);
+    }, [selectedOptions, question.testSignals]);
+
+    useEffect(() => {
+        let newAudioTestBlocks = [];
+        //fill all audio test blocks
+        question.testSignals.forEach((audioPath, audioIndex) => {
+            newAudioTestBlocks.push(
+                <AudioTestBlock
+                    key={audioIndex} 
+                    question={question}
+                    audioPath={audioPath}
+                    audioIndex={audioIndex}
+                    questionIndex={questionIndex}
+                    selectedOptions={selectedOptions}
+                    handleOptionClick={handleOptionClick}
+                />
+            );
+        });
+
+        if (question.anchor){
+            newAudioTestBlocks.push(
+                <AudioTestBlock
+                    key={'anchorblock'}  
+                    question={question}
+                    audioPath={question.anchor}
+                    audioIndex={'anchor'}
+                    questionIndex={questionIndex}
+                    selectedOptions={selectedOptions}
+                    handleOptionClick={handleOptionClick}
+                />
+            );
+        }
+        if (question.reference){
+            newAudioTestBlocks.push(
+                <AudioTestBlock
+                    key={'reference_block'} 
+                    question={question}
+                    audioPath={question.reference}
+                    audioIndex={'reference'}
+                    questionIndex={questionIndex}
+                    selectedOptions={selectedOptions}
+                    handleOptionClick={handleOptionClick}
+                />
+            );
+        }                                
+        setAudioTestBlocks(newAudioTestBlocks);
+    }, [question, selectedOptions]);
 
     const handleOptionClick = (option, audioIndex) => {
         let newSelectedOptions = [...selectedOptions];
+        newSelectedOptions['anchor'] = selectedOptions.anchor;
+        newSelectedOptions['reference'] = selectedOptions.reference;
         newSelectedOptions[audioIndex] = option;
-        console.log(newSelectedOptions);
+        console.log(newSelectedOptions)
         setSelectedOptions(newSelectedOptions);
     };
 
@@ -38,27 +102,11 @@ export default function Question({ question, questionIndex, testResults, setTest
 
     return (
         <div>
-            <h2>{question.title}</h2>
+            <h2 className='font-bold text-lg'>{question.name}</h2>
             <p>{question.description}</p>
             <ul>
-                {question.testSignals.map((audioPath, audioIndex) => (
-                    <div className='flex flex-row items-center justify-center gap-4 text-center' key={`div_${audioIndex}`}>
-                        <audio controls src={audioPath} key={audioIndex} />
-                        {question.scale.labels.map((option, optionIndex) => (
-                            <li key={audioIndex + '_' + optionIndex}>
-                                <input
-                                    type="radio"
-                                    name={`question-${audioIndex + '_' + questionIndex}`}
-                                    checked={selectedOptions[audioIndex] === option}
-                                    onChange={() => handleOptionClick(option, audioIndex)}
-                                />
-                                {option}
-                            </li>
-                        ))}
-                    </div>
-                ))}
+                {question.hiddenReference ? shuffleArrayByIndexes(audioTestBlocks,randomIndexes) : audioTestBlocks}
             </ul>
-
             <Button color='blue' onClick={handleAnswer} disabled={!submitEnabled}>Submit</Button>
         </div>
     );

@@ -7,26 +7,30 @@
     "questions":
     [
         {
-            "name": "Questão comparativa",
+            "name": "Insert question name here",
+            "description": "Insert a description here",
+            "prompt": "Listen and evaluate:",
             "id":1,
-            "anchor": null,
-            "reference": null,
-            "testSignals": ["test_signals/synthetic_sample.wav", "test_signals/synthetic_sample.wav"],
+            "anchor": "test_signals/anchor.wav",
+            "reference": "test_signals/reference.wav",
+            "testSignals": ["test_signals/test.wav", "test_signals/test.wav"],
             "scale": {
               "type": ["continous", "discrete", "dropdown"],
               "alignment": ["horizontal", "vertical"],
               "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
               "values": [0,1,2,3,4]
             },
-            "hiddenReference": null
+            "hiddenReference": false
         },
 
         {
-            "name": "Questão comparativa 2",
+            "name": "Insert question name here",
+            "description": "Insert a description here",
+            "prompt": "Listen and evaluate:",
             "id":2,
             "anchor": null,
             "reference": null,
-            "testSignals": ["test_signals/synthetic_sample.wav", "test_signals/synthetic_sample.wav", "test_signals/synthetic_sample.wav","test_signals/synthetic_sample.wav"],
+            "testSignals": ["test_signals/test.wav", "test_signals/test.wav", "test_signals/test.wav","test_signals/test.wav"],
             "scale": {
                 "type": ["continous", "discrete", "dropdown"],
                 "alignment": ["horizontal", "vertical"],
@@ -36,18 +40,20 @@
             "hiddenReference": null
         },
         {
-            "name": "Questão comparativa 3",
+            "name": "Insert question name here",
+            "description": "Insert a description here",
+            "prompt": "Listen and evaluate:",
             "id":3,
-            "anchor": null,
-            "reference": null,
-            "testSignals": ["test_signals/synthetic_sample.wav"],
+            "anchor": "test_signals/anchor.wav",
+            "reference": "test_signals/reference.wav",
+            "testSignals": ["test_signals/test.wav","test_signals/test.wav"],
             "scale": {
                 "type": ["continous", "discrete", "dropdown"],
                 "alignment": ["horizontal", "vertical"],
                 "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
                 "values": [0,1,2,3,4]
             },
-            "hiddenReference": null
+            "hiddenReference": true
         }
     ]
 }

@@ -39,7 +39,6 @@ export default function TestScreen({questions}) {
         {
             testComplete? <h1>Test Complete</h1>: 
             <Card className="flex justify-center items-center gap-4 p-8 max-w-[80%]">
-                <h1>Test {currentQuestion+1}:</h1>
                 
                     <Question question={questions[currentQuestion]}
                         questionIndex={currentQuestion}

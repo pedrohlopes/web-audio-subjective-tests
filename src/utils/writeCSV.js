@@ -1,6 +1,8 @@
 const writeCSV = (testResults) => {
-    const csvContent = "data:text/csv;charset=utf-8," + "QuestionId;QuestionName;QuestionAnswers\n" +testResults.map(questionResults =>
-         `${questionResults.questionId};${questionResults.answers.toString()}`).join("\n");
+    const csvContent = "data:text/csv;charset=utf-8," + "QuestionId;QuestionName;QuestionAnswers;AnchorAnswers;ReferenceAnswers\n" + 
+    testResults.map(questionResults =>
+         `${questionResults.questionId};${questionResults.answers.toString()};${questionResults.answers['anchor']};${questionResults.answers['reference']}`)
+         .join("\n");
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
