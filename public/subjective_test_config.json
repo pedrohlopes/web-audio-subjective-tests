@@ -53,7 +53,7 @@
             "reference": "test_signals/reference.wav",
             "testSignals": ["test_signals/test.wav","test_signals/test.wav"],
             "scale": {
-                "type": "dropdown",
+                "type": "discrete",
                 "alignment": ["horizontal", "vertical"],
                 "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
                 "values": [0,1,2,3,4]
