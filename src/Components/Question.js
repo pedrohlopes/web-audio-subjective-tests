@@ -22,10 +22,10 @@ export default function Question({ question, questionIndex, testResults, setTest
     useEffect(() => {
         // Check if all audio signals are tested
         let allAudioTested = selectedOptions.length === question.testSignals.length && selectedOptions.every(option => option !== "");
-        if (question.anchor){
+        if (question.anchor && question.anchorEvaluated){
             allAudioTested = allAudioTested && selectedOptions['anchor']
         }
-        if (question.reference){
+        if (question.reference && question.referenceEvaluated){
             allAudioTested = allAudioTested && selectedOptions['reference']
         }
         
@@ -35,7 +35,21 @@ export default function Question({ question, questionIndex, testResults, setTest
     useEffect(() => {
         let newAudioTestBlocks = [];
         //fill all audio test blocks
+        if (question.reference){
+            newAudioTestBlocks.push(
+                <AudioTestBlock
+                    key={'reference_block'} 
+                    question={question}
+                    audioPath={question.reference}
+                    audioIndex={'reference'}
+                    questionIndex={questionIndex}
+                    selectedOptions={selectedOptions}
+                    handleOptionClick={handleOptionClick}
+                />
+            );
+        }  
         question.testSignals.forEach((audioPath, audioIndex) => {
+
             newAudioTestBlocks.push(
                 <AudioTestBlock
                     key={audioIndex} 
@@ -62,19 +76,7 @@ export default function Question({ question, questionIndex, testResults, setTest
                 />
             );
         }
-        if (question.reference){
-            newAudioTestBlocks.push(
-                <AudioTestBlock
-                    key={'reference_block'} 
-                    question={question}
-                    audioPath={question.reference}
-                    audioIndex={'reference'}
-                    questionIndex={questionIndex}
-                    selectedOptions={selectedOptions}
-                    handleOptionClick={handleOptionClick}
-                />
-            );
-        }                                
+                              
         setAudioTestBlocks(newAudioTestBlocks);
     }, [question, selectedOptions]);
 

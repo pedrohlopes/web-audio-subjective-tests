@@ -15,12 +15,15 @@
             "reference": "test_signals/reference.wav",
             "testSignals": ["test_signals/test.wav", "test_signals/test.wav"],
             "scale": {
-              "type": ["continous", "discrete", "dropdown"],
+              "type": "continuous",
               "alignment": ["horizontal", "vertical"],
               "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
-              "values": [0,1,2,3,4]
+              "values": [0,25,50,75,100],
+              "range": [0,100]
             },
-            "hiddenReference": false
+            "hiddenReference": false,
+            "referenceEvaluated": false,
+            "anchorEvaluated": true
         },
 
         {
@@ -32,12 +35,14 @@
             "reference": null,
             "testSignals": ["test_signals/test.wav", "test_signals/test.wav", "test_signals/test.wav","test_signals/test.wav"],
             "scale": {
-                "type": ["continous", "discrete", "dropdown"],
+                "type": "dropdown",
                 "alignment": ["horizontal", "vertical"],
                 "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
                 "values": [0,1,2,3,4]
             },
-            "hiddenReference": null
+            "hiddenReference": null,
+            "referenceEvaluated": false,
+            "anchorEvaluated": true
         },
         {
             "name": "Insert question name here",
@@ -48,12 +53,14 @@
             "reference": "test_signals/reference.wav",
             "testSignals": ["test_signals/test.wav","test_signals/test.wav"],
             "scale": {
-                "type": ["continous", "discrete", "dropdown"],
+                "type": "dropdown",
                 "alignment": ["horizontal", "vertical"],
                 "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
                 "values": [0,1,2,3,4]
             },
-            "hiddenReference": true
+            "hiddenReference": true,
+            "referenceEvaluated": false,
+            "anchorEvaluated": true
         }
     ]
 }

@@ -35,20 +35,20 @@ export default function TestScreen({questions}) {
 
 
     return (
-        <div className="flex items-center content-center justify-center mt-4">
+        <Card className="flex justify-center items-center gap-4 p-8 max-w-[80%]">
         {
             testComplete? <h1>Test Complete</h1>: 
-            <Card className="flex justify-center items-center gap-4 p-8 max-w-[80%]">
-                
+            
+                <>
                     <Question question={questions[currentQuestion]}
                         questionIndex={currentQuestion}
                         setQuestionIndex={setCurrentQuestion}
                         testResults={testResults}
                         setTestResults={setTestResults}
                     />
-                
-            </Card>
+                </>
+            
         }
-        </div>
+        </Card>
     );
 }

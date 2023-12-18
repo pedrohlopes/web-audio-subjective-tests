@@ -24,7 +24,7 @@ function App() {
       return <div>Loading...</div>;
   }
   return (
-    <div className="App">
+    <div className="App flex items-center content-center justify-center pt-8">
       {homeClear? <TestScreen questions={questions}/>:  <Home setHomeClear={setHomeClear} homeInfo={homeInfo}/>}
     </div>
   );

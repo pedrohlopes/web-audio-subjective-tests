@@ -1,5 +1,5 @@
 const writeCSV = (testResults) => {
-    const csvContent = "data:text/csv;charset=utf-8," + "QuestionId;QuestionName;QuestionAnswers;AnchorAnswers;ReferenceAnswers\n" + 
+    const csvContent = "data:text/csv;charset=utf-8," + "QuestionId;QuestionAnswers;AnchorAnswers;ReferenceAnswers\n" + 
     testResults.map(questionResults =>
          `${questionResults.questionId};${questionResults.answers.toString()};${questionResults.answers['anchor']};${questionResults.answers['reference']}`)
          .join("\n");
