@@ -48,6 +48,20 @@ export default function Question({ question, questionIndex, testResults, setTest
                 />
             );
         }  
+        if (question.reference2){
+            newAudioTestBlocks.push(
+                <AudioTestBlock
+                    key={'reference_block'} 
+                    question={question}
+                    audioPath={question.reference2}
+                    audioIndex={'reference2'}
+                    questionIndex={questionIndex}
+                    selectedOptions={selectedOptions}
+                    handleOptionClick={handleOptionClick}
+                />
+            );
+            
+        }
         question.testSignals.forEach((audioPath, audioIndex) => {
 
             newAudioTestBlocks.push(
@@ -105,7 +119,8 @@ export default function Question({ question, questionIndex, testResults, setTest
     return (
         <div>
             <h2 className='font-bold text-lg'>{question.name}</h2>
-            <p>{question.description}</p>
+            
+            <p className="whitespace-pre-line">{question.description}</p>
             <ul>
                 {question.hiddenReference ? shuffleArrayByIndexes(audioTestBlocks,randomIndexes) : audioTestBlocks}
             </ul>

@@ -1,0 +1,83 @@
+{
+    "homeInfo": {
+        "title": "Home",
+        "message": "Esse é um teste para testar alguma coisa.",
+        "buttonText": "Começar teste"
+    },
+    "questions":
+    [
+        {
+            "name": "Insert question name here",
+            "description": "Insert a description here",
+            "id":1,
+            "anchor": "test_signals/anchor.wav",
+            "reference": "test_signals/reference.wav",
+            "testSignals": ["test_signals/test.wav", "test_signals/test.wav"],
+            "prompts":{
+                "0":"Insert prompt here",
+                "1":"Insert prompt here 2",
+                "anchor": "Insert prompt here (anchor)",
+                "reference": "Insert prompt here (reference)"
+            },
+            "scale": {
+              "type": "continuous",
+              "alignment": ["horizontal", "vertical"],
+              "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
+              "values": [0,20,40,60,80,100],
+              "range": [0,100]
+            },
+            "hiddenReference": false,
+            "referenceEvaluated": false,
+            "anchorEvaluated": true
+        },
+
+        {
+            "name": "Insert question name here",
+            "description": "Insert a description here",
+            "id":2,
+            "anchor": null,
+            "reference": null,
+            "testSignals": ["test_signals/test.wav", "test_signals/test.wav", "test_signals/test.wav","test_signals/test.wav"],
+            "prompts":{
+                "0":"Insert prompt here",
+                "1":"Insert prompt here 2",
+                "2":"Insert prompt here 3",
+                "3":"Insert prompt here 4",
+                "anchor": "Insert prompt here (anchor)",
+                "reference": "Insert prompt here (reference)"
+            },
+            "scale": {
+                "type": "dropdown",
+                "alignment": ["horizontal", "vertical"],
+                "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
+                "values": [0,1,2,3,4]
+            },
+            "hiddenReference": null,
+            "referenceEvaluated": false,
+            "anchorEvaluated": true
+        },
+        {
+            "name": "Insert question name here",
+            "description": "Insert a description here",
+            "id":3,
+            "anchor": "test_signals/anchor.wav",
+            "reference": "test_signals/reference.wav",
+            "testSignals": ["test_signals/test.wav","test_signals/test.wav"],
+            "prompts":{
+                "0":"Insert prompt here",
+                "1":"Insert prompt here 2",
+                "anchor": "Insert prompt here (anchor)",
+                "reference": "Insert prompt here (reference)"
+            },
+            "scale": {
+                "type": "discrete",
+                "alignment": ["horizontal", "vertical"],
+                "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
+                "values": [0,1,2,3,4]
+            },
+            "hiddenReference": true,
+            "referenceEvaluated": false,
+            "anchorEvaluated": true
+        }
+    ]
+}

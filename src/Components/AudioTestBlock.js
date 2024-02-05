@@ -5,7 +5,9 @@ export default function AudioTestBlock({ question, audioPath, audioIndex, questi
     
 
 
-    const showScale = audioIndex!='reference' || (question.hiddenReference) || question.referenceEvaluated
+    const showScale = audioIndex!=('reference')&&audioIndex!=('reference2')  || (question.hiddenReference) || question.referenceEvaluated
+    
+    
     return (
         <div className='flex flex-col mb-8'>
         <h2 className='mb-2 self-start'>{question.prompts[audioIndex]}</h2>
