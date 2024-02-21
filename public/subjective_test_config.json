@@ -1,8 +1,8 @@
 {
     "homeInfo": {
         "title": "Home",
-        "message": "Esse é um teste para testar alguma coisa.",
-        "buttonText": "Começar teste"
+        "message": "This is a test to evaluate something.\n Please click the button below to start the test.",
+        "buttonText": "Start test"
     },
     "questions":
     [
@@ -10,23 +10,50 @@
             "name": "Insert question name here",
             "description": "Insert a description here",
             "id":1,
-            "anchor": "test_signals/anchor.wav",
-            "reference": "test_signals/reference.wav",
+            "anchors": ["test_signals/anchor.wav"],
+            "references": ["test_signals/reference.wav", "test_signals/reference.wav"],
             "testSignals": ["test_signals/test.wav", "test_signals/test.wav"],
             "prompts":{
-                "0":"Insert prompt here",
+                "0":"Insert prompt here 1",
                 "1":"Insert prompt here 2",
-                "anchor": "Insert prompt here (anchor)",
-                "reference": "Insert prompt here (reference)"
+                "anchor0": "Insert prompt here (anchor 0)",
+                "reference0": "Insert prompt here (reference 0)",
+                "reference1": "Insert prompt here (reference 1)"
             },
             "scale": {
               "type": "continuous",
-              "alignment": ["horizontal", "vertical"],
+              "alignment": "horizontal",
+              "labels": [""],
+              "borderLabels": ["worse","best"],
+              "values": [0,20,40,60,80,100],
+              "range": [0,100]
+            },
+            "hiddenReferenceAndAnchor": false,
+            "referenceEvaluated": true,
+            "anchorEvaluated": true
+        },
+        {
+            "name": "Insert question name here",
+            "description": "Insert a description here",
+            "id":1,
+            "anchors": ["test_signals/anchor.wav"],
+            "references": ["test_signals/reference.wav", "test_signals/reference.wav"],
+            "testSignals": ["test_signals/test.wav", "test_signals/test.wav"],
+            "prompts":{
+                "0":"Insert prompt here 1",
+                "1":"Insert prompt here 2",
+                "anchor0": "Insert prompt here (anchor 0)",
+                "reference0": "Insert prompt here (reference 0)",
+                "reference1": "Insert prompt here (reference 1)"
+            },
+            "scale": {
+              "type": "continuous",
+              "alignment": "horizontal",
               "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
               "values": [0,20,40,60,80,100],
               "range": [0,100]
             },
-            "hiddenReference": false,
+            "hiddenReferenceAndAnchor": false,
             "referenceEvaluated": false,
             "anchorEvaluated": true
         },
@@ -35,24 +62,22 @@
             "name": "Insert question name here",
             "description": "Insert a description here",
             "id":2,
-            "anchor": null,
-            "reference": null,
+            "anchors": null,
+            "references": null,
             "testSignals": ["test_signals/test.wav", "test_signals/test.wav", "test_signals/test.wav","test_signals/test.wav"],
             "prompts":{
                 "0":"Insert prompt here",
                 "1":"Insert prompt here 2",
                 "2":"Insert prompt here 3",
-                "3":"Insert prompt here 4",
-                "anchor": "Insert prompt here (anchor)",
-                "reference": "Insert prompt here (reference)"
+                "3":"Insert prompt here 4"
             },
             "scale": {
                 "type": "dropdown",
-                "alignment": ["horizontal", "vertical"],
+                "alignment": "horizontal",
                 "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
                 "values": [0,1,2,3,4]
             },
-            "hiddenReference": null,
+            "hiddenReferenceAndAnchor": false,
             "referenceEvaluated": false,
             "anchorEvaluated": true
         },
@@ -71,7 +96,7 @@
             },
             "scale": {
                 "type": "discrete",
-                "alignment": ["horizontal", "vertical"],
+                "alignment": "horizontal",
                 "labels": ["Bad","Poor","Fair", "Good", "Excellent"],
                 "values": [0,1,2,3,4]
             },

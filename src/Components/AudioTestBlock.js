@@ -2,10 +2,17 @@ import ScaleBlock from "./ScaleBlock"
 
 
 export default function AudioTestBlock({ question, audioPath, audioIndex, questionIndex, selectedOptions, handleOptionClick }){
-    
+    const isReference = typeof(audioIndex) === 'string' && audioIndex.includes('reference')
+    const isAnchor = typeof(audioIndex) === 'string' && audioIndex.includes('anchor')
+    let isEvaluated = true
+    if (isReference && !question.referenceEvaluated){
+        isEvaluated = false
+    }
+    if (isAnchor && !question.anchorEvaluated){
+        isEvaluated = false
+    }
 
-
-    const showScale = audioIndex!='reference' || (question.hiddenReference) || question.referenceEvaluated
+    const showScale = !(isReference || isAnchor) || (question.hiddenReferenceAndAnchor) || isEvaluated
     return (
         <div className='flex flex-col mb-8'>
         <h2 className='mb-2 self-start'>{question.prompts[audioIndex]}</h2>

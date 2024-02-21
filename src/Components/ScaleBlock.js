@@ -32,7 +32,7 @@ export default function ScaleBlock({question, handleOptionSelect, audioIndex, qu
                     label="Select"
                     value={selectedOptions[audioIndex]}
                     onChange={(e) => handleOptionSelect(e, audioIndex)}
-                    size='sm'
+                    size='md'
                     className="text-left items-start content-start"
                 >
                     {question.scale.labels.map((option, optionIndex) => (
@@ -51,22 +51,28 @@ export default function ScaleBlock({question, handleOptionSelect, audioIndex, qu
                 label: label
             }
         })
-        console.log(marks)
+
         return (
-        <Box sx={{ width: 400, paddingX:5, wordWrap:"break-word" }}>
+        <Box className='flex flex-row' sx={{ width: 500, paddingX:5, wordWrap:"break-word" }}>
+
+            <p className="mr-2 translate-y-8">{question.scale.borderLabels? question.scale.borderLabels[0]: null}</p>
             <Slider
     
               aria-label="Temperature"
               defaultValue={(question.scale.range[1]+question.scale.range[0])/2}
             //   value={selectedOptions[audioIndex]}
               getAriaValueText={valuetext}
-              valueLabelDisplay="on"
+              valueLabelDisplay="auto"
               marks={marks}
               onChange={(e) =>{console.log(e); handleOptionSelect(e.target.value, audioIndex)}}
+              //color={selectedOptions[audioIndex] && selectedOptions[audioIndex] !== '' ? 'primary':'gray'}
+              sx={{color: selectedOptions[audioIndex] && selectedOptions[audioIndex] !== '' ? 'primary':'gray'}}
               min={question.scale.range[0]}
               max={question.scale.range[1]}
             />
+            <p className="mr-2 translate-y-8">{question.scale.borderLabels? question.scale.borderLabels[1]: null}</p>
           </Box>
+          
         )
     }
 
