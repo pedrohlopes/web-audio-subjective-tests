@@ -7,12 +7,19 @@ export default function Question({ question, questionIndex, testResults, setTest
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [submitEnabled, setSubmitEnabled] = useState(false);
     const [audioTestBlocks, setAudioTestBlocks] = useState([]);
-
+    const [randomIndexes, setRandomIndexes] = useState([]);
 
 
     useEffect(() => {
         // Reset selectedOptions when question changes
-        let newSelectedOptions = Array(question.testSignals.length).fill("");
+        setRandomIndexes(getRandomIndexes(question.testSignals.map((signal, index) => index)))
+        let newSelectedOptions = [];
+        if (question.shuffleTestSignals){
+            newSelectedOptions = shuffleArrayByIndexes(Array(question.testSignals.length).fill(""), randomIndexes);
+        }
+        else {
+            newSelectedOptions = Array(question.testSignals.length).fill("");
+        }
         question.references?.forEach((reference, referenceIndex) => {
             newSelectedOptions['reference' + referenceIndex] = "";
         }
@@ -21,7 +28,7 @@ export default function Question({ question, questionIndex, testResults, setTest
             newSelectedOptions['anchor' + anchorIndex] = "";
         }
         )
-        setSelectedOptions(Array(question.testSignals.length).fill(""));
+        setSelectedOptions(newSelectedOptions);
     }, [question]);
 
     useEffect(() => {
@@ -81,7 +88,7 @@ export default function Question({ question, questionIndex, testResults, setTest
         console.log(testSignalsBlocks)
         if (question.shuffleTestSignals){
             newAudioTestBlocks = newAudioTestBlocks.concat(
-                shuffle(testSignalsBlocks)
+                shuffleArrayByIndexes(testSignalsBlocks,randomIndexes)
             );
             console.log('shuffled')
             console.log(shuffle(testSignalsBlocks)) 
