@@ -7,7 +7,6 @@ export default function Question({ question, questionIndex, testResults, setTest
     const [selectedOptions, setSelectedOptions] = useState([]);
     const [submitEnabled, setSubmitEnabled] = useState(false);
     const [audioTestBlocks, setAudioTestBlocks] = useState([]);
-    const [randomIndexes, setRandomIndexes] = useState([]);
 
 
 
@@ -23,15 +22,6 @@ export default function Question({ question, questionIndex, testResults, setTest
         }
         )
         setSelectedOptions(Array(question.testSignals.length).fill(""));
-        setRandomIndexes(getRandomIndexes(newSelectedOptions.concat(
-            question.references?.map((reference, referenceIndex) => {
-                return 'reference' + referenceIndex
-            }
-            ),
-            question.anchors?.map((anchor, anchorIndex) => {
-                return 'anchor' + anchorIndex
-            })
-        )))
     }, [question]);
 
     useEffect(() => {
@@ -71,10 +61,11 @@ export default function Question({ question, questionIndex, testResults, setTest
                     />
                 );
             });
-        }  
+        }
+        let testSignalsBlocks = []  
         question.testSignals.forEach((audioPath, audioIndex) => {
 
-            newAudioTestBlocks.push(
+            testSignalsBlocks.push(
                 <AudioTestBlock
                     key={audioIndex} 
                     question={question}
@@ -86,6 +77,18 @@ export default function Question({ question, questionIndex, testResults, setTest
                 />
             );
         });
+
+        console.log(testSignalsBlocks)
+        if (question.shuffleTestSignals){
+            newAudioTestBlocks = newAudioTestBlocks.concat(
+                shuffle(testSignalsBlocks)
+            );
+            console.log('shuffled')
+            console.log(shuffle(testSignalsBlocks)) 
+        } else {
+            newAudioTestBlocks = newAudioTestBlocks.concat(testSignalsBlocks);
+        }
+
 
         if (question.anchors?.length >0){
             console.log('anchors present')
@@ -142,7 +145,7 @@ export default function Question({ question, questionIndex, testResults, setTest
             <h2 className='font-bold text-lg'>{question.name}</h2>
             <p className="whitespace-pre-line">{question.description}</p>
             <ul>
-                {question.hiddenReferenceAndAnchor ? shuffleArrayByIndexes(audioTestBlocks,randomIndexes) : audioTestBlocks}
+                { audioTestBlocks}
             </ul>
             <Button color='blue' onClick={handleAnswer} disabled={!submitEnabled}>Submit</Button>
         </div>
