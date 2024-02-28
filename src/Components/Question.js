@@ -147,7 +147,7 @@ export default function Question({ question, questionIndex, testResults, setTest
             <ul>
                 { audioTestBlocks}
             </ul>
-            <Button color='blue' onClick={handleAnswer} disabled={!submitEnabled}>Submit</Button>
+            <Button color='blue' onClick={handleAnswer} disabled={!submitEnabled}>{question.submitButtonText}</Button>
         </div>
     );
 }
