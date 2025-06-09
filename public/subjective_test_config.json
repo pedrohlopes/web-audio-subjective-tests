@@ -12,7 +12,7 @@
             "id":1,
             "anchors": ["test_signals/anchor.wav"],
             "references": ["test_signals/reference.wav", "test_signals/reference.wav"],
-            "testSignals": ["test_signals/test.wav", "test_signals/test.wav"],
+            "testSignals": ["test_signals/test.wav", "Test signal example."],
             "prompts":{
                 "0":"Insert prompt here 1",
                 "1":"Insert prompt here 2",
